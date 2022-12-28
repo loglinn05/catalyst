@@ -1,0 +1,38 @@
+// Materialize
+@import '../../node_modules/materialize-css/dist/css/materialize.min.css';
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+// Variables
+@import 'variables';
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+a {
+    color: var(--pink-2);
+    text-decoration: none;
+}
+
+a:active {
+    color: var(--pink-3);
+}
+
+body {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--pink-1);
+    background-image: linear-gradient(to right bottom, var(--light-bg-gradient-color), var(--dark-bg-gradient-color));
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
