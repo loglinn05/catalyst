@@ -32,7 +32,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             axios.post('api/login', payload).then(response => {
                 if (response.data.access_token) {
-                    localStorage.setItem('token', response.data.access_token);
+                    ctx.commit('setToken', response.data.access_token);
                     ctx.commit('setLoggedIn', true);
                     resolve(response);
                     router.push('/')
@@ -67,6 +67,10 @@ const actions = {
 const mutations = {
     setLoggedIn(state, payload) {
         state.loggedIn = payload;
+    },
+    setToken(state, token) {
+        localStorage.setItem('token', token);
+        state.token = token;
     }
 }
 
