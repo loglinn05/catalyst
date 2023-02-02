@@ -1,83 +1,110 @@
-import axios from 'axios'
+import axios from '../../axios/axiosInstance.js'
 import router from '../../router/router.js'
+import toast from '../../modules/toast.js'
 
-const state = {
-    userDetails: {},
-    loggedIn: false
-}
+const state = {}
+
 const actions = {
-    registerUser({}, user) {
+    registerUser(ctx, user) {
         return new Promise((resolve, reject) => {
+            ctx.commit('setInProcess', true, { root: true });
             axios.post(
-                '/api/register', {
-                    username: user.username,
-                    email: user.email,
-                    password: user.password,
-                    password_confirmation: user.passwordConfirmation
-                }
+                '/api/register', user
             ).then((response) => {
                 if (response.data) {
                     resolve(response)
                     router.push('/login')
                 } else {
+                    ctx.dispatch(
+                        'setAndDisplayErrors',
+                        [ctx.rootState.helper.undefinedErrorMessage],
+                        { root: true }
+                    );
                     reject(response)
                 }
             }).catch((error) => {
-                console.log('error');
+                if (error.response.data.errors) {
+                    ctx.dispatch(
+                        'setAndDisplayErrors',
+                        error.response.data.errors,
+                        { root: true }
+                    );
+                } else {
+                    ctx.dispatch(
+                        'setAndDisplayErrors',
+                        [ctx.rootState.helper.undefinedErrorMessage],
+                        { root: true }
+                    );
+                }
                 reject(error)
+            }).finally(() => {
+                ctx.commit('setInProcess', false, { root: true });
             })
         })
     },
     loginUser(ctx, payload) {
         return new Promise((resolve, reject) => {
+            ctx.commit('setInProcess', true, { root: true });
             axios.post('api/login', payload).then(response => {
                 if (response.data.access_token) {
+                    ctx.commit('setLoggedIn', true, { root: true })
                     localStorage.setItem('token', response.data.access_token);
-                    ctx.commit('setLoggedIn', true);
+                    ctx.commit('setToken', response.data.access_token, { root: true })
                     resolve(response);
-                    router.push('/')
+                    router.push('/');
                 } else {
+                    ctx.dispatch(
+                        'setAndDisplayErrors',
+                        [ctx.rootState.helper.undefinedErrorMessage],
+                        { root: true }
+                    );
                     reject(response)
                 }
             }).catch(error => {
+                console.log(error)
+                if (error.response.data.errors) {
+                    ctx.dispatch(
+                        'setAndDisplayErrors',
+                        error.response.data.errors,
+                        { root: true }
+                    );
+                } else {
+                    ctx.dispatch(
+                        'setAndDisplayErrors',
+                        [ctx.rootState.helper.undefinedErrorMessage],
+                        { root: true }
+                    );
+                }
                 reject(error);
+            }).finally(() => {
+                ctx.commit('setInProcess', false, { root: true });
             })
         })
     },
     logoutUser({ commit }) {
         return new Promise((resolve) => {
             localStorage.removeItem('token');
-            commit('setLoggedIn', false);
+            commit('setLoggedIn', false, { root: true })
+            commit('setToken', '', { root: true })
             resolve(true)
             router.push('/login');
         })
     },
-    setUserAuthStatus({ commit }) {
+    setUserAuthStatus(ctx) {
         return new Promise((resolve) => {
-            if (localStorage.getItem('token')) {
-                commit('setLoggedIn', true)
+            if (ctx.rootGetters.auth.token) {
+                ctx.commit('setLoggedIn', true, { root: true })
                 resolve(true)
             } else {
-                commit('setLoggedIn', false)
+                ctx.commit('setLoggedIn', false, { root: true })
                 resolve(false)
             }
         })
     }
 }
-const mutations = {
-    setLoggedIn(state, payload) {
-        state.loggedIn = payload;
-    }
-}
+const mutations = {}
 
-const getters = {
-    loggedIn(state) {
-        return state.loggedIn
-    },
-    userDetails(state) {
-        return state.userDetails
-    }
-}
+const getters = {}
 
 export default {
     namespaced: true,

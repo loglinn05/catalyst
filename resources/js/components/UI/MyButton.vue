@@ -1,5 +1,8 @@
 <template>
-    <a :class="'waves-effect waves-light btn ' + color"><slot></slot></a>
+    <a :class="'waves-effect waves-'+ wavesColor + ' btn' +
+    [flat ? '-flat' : ''] + [!flat ? (' ' + color) : '']">
+        <slot></slot>
+    </a>
 </template>
 
 <script>
@@ -9,6 +12,14 @@ export default {
         color: {
             type: String,
             default: "pink darken-3"
+        },
+        wavesColor: {
+            type: String,
+            default: "light"
+        },
+        flat: {
+            type: Boolean,
+            default: false
         }
     }
 }

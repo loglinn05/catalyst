@@ -4,28 +4,44 @@
             <div class="nav-wrapper pink darken-3">
                 <router-link to="/"><img src="../images/logo.png"/></router-link>
                 <ul class="right hide-on-med-and-down">
-                    <li><router-link to="/register">
-                        Register
-                    </router-link></li>
-                    <li><router-link to="/login">
-                        Log In
-                    </router-link></li>
-                    <li><router-link to="/profile-page">
-                        <i class="material-icons">account_circle</i>
-                    </router-link></li>
-                    <li>
-                        <my-button
-                            :color="'pink darken-2'"
-                            @click="logout"
-                            v-if="loggedIn">Log Out</my-button>
-                    </li>
+                    <template v-if="!loggedIn">
+                        <li>
+                            <router-link to="/register">
+                                Register
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/login">
+                                Log In
+                            </router-link>
+                        </li>
+                    </template>
+                    <template v-if="loggedIn">
+                        <li title="Profile Page">
+                            <router-link to="/profile">
+                                <i class="material-icons">account_circle</i>
+                            </router-link>
+                        </li>
+                        <li title="Settings">
+                            <router-link to="/settings">
+                                <i class="material-icons">settings</i>
+                            </router-link>
+                        </li>
+                        <li>
+                            <my-button
+                                :color="'pink darken-2'"
+                                @click="logout">Log Out</my-button>
+                        </li>
+                    </template>
                 </ul>
             </div>
         </nav>
     </div>
     <div class="container">
         <div class="row">
-            <router-view></router-view>
+            <div class="col s12 center">
+                <router-view></router-view>
+            </div>
         </div>
     </div>
 </template>
@@ -36,8 +52,11 @@ export default {
     name: "root",
     computed: {
         ...mapGetters({
-            loggedIn: 'auth/loggedIn',
-        })
+            userAuthInfo: 'auth',
+        }),
+        loggedIn() {
+            return this.userAuthInfo.loggedIn;
+        }
     },
     methods: {
         ...mapActions({

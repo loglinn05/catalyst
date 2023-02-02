@@ -11,7 +11,8 @@
         "laravel/passport": "^11.3",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "laravel/ui": "^4.1"
+        "laravel/ui": "^4.1",
+        "lorisleiva/laravel-actions": "^2.4"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

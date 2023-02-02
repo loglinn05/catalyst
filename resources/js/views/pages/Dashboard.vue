@@ -4,7 +4,10 @@
 
 <script>
 export default {
-    name: "Dashboard.vue"
+    name: "dashboard",
+    beforeMount() {
+        this.$store.dispatch('users/currentUserDetails')
+    }
 }
 </script>
 

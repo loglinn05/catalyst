@@ -6,7 +6,17 @@ const state = {
 	},
 }
 const actions = {}
-const mutations = {}
+const mutations = {
+    setLoggedIn(state, payload) {
+        state.user.loggedIn = payload;
+    },
+    setIsSubscribed(state, payload) {
+        state.user.isSubscribed = payload;
+    },
+    setToken(state, payload) {
+        state.user.token = payload;
+    }
+}
 const getters = {
 	auth(state) {
 		return state.user

@@ -14,10 +14,22 @@
 export default {
     name: "my-input",
     props: {
-        cols: [Number],
-        id: [String],
-        type: [String],
-        labelText: [String],
+        cols: {
+            type: Number,
+            default: 12
+        },
+        id: {
+            type: String,
+            required: true
+        },
+        type: {
+            type: String,
+            default: 'text'
+        },
+        labelText: {
+            type: String,
+            required: true
+        },
         modelValue: [String, Number]
     },
     methods: {
@@ -29,6 +41,9 @@ export default {
 </script>
 
 <style scoped>
+.modal .modal-content .input-field:last-child {
+    margin-bottom: 0;
+}
 /* input text color */
 .input-field input {
     color: var(--pink-4);
@@ -52,7 +67,7 @@ export default {
     box-shadow: 0 1px 0 0 var(--pink-4) !important;
 }
 .input-field .helper-text:after {
-    color: var(--pink-2) !important;
+    color: var(--pink-3) !important;
 }
 /* icon prefix focus color */
 .input-field .prefix.active {

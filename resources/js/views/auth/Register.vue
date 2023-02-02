@@ -1,46 +1,64 @@
 <template>
-    <form class="col s6 offset-s3">
+    <div class="col s6 offset-s3">
         <div class="row">
-            <my-input
-                :cols="12"
-                :id="'username'"
-                :type="'text'"
-                :label-text="'Username'"
-                v-model="user.username"
-            />
+            <h3>Register</h3>
+            <form class="col s12">
+                <div class="row">
+                    <my-input
+                        :id="'username'"
+                        :label-text="'Username'"
+                        v-model="user.name"
+                    />
+                </div>
+                <div class="row">
+                    <my-input
+                        :id="'email'"
+                        :type="'email'"
+                        :label-text="'E-mail'"
+                        v-model="user.email"
+                    />
+                </div>
+                <div class="row">
+                    <my-input
+                        :id="'password'"
+                        :type="'password'"
+                        :label-text="'Password'"
+                        v-model="user.password"
+                    />
+                </div>
+                <div class="row">
+                    <my-input
+                        :id="'password-confirmation'"
+                        :type="'password'"
+                        :label-text="'Password Confirmation'"
+                        @keydown.enter="register"
+                        v-model="user.password_confirmation"
+                    />
+                </div>
+                <div class="row center valign-wrapper justify-content-center">
+                    <my-button :class="[inProcess ? 'in-process' : '']" @click="register">Register</my-button>
+                    <div v-if="inProcess" class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-red-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>Already have an account?
+                    <router-link to="/login">
+                        <a href="#">Log In.</a>
+                    </router-link>
+                </p>
+            </form>
         </div>
-        <div class="row">
-            <my-input
-                :cols="12"
-                :id="'email'"
-                :type="'email'"
-                :label-text="'E-mail'"
-                v-model="user.email"
-            />
-        </div>
-        <div class="row">
-            <my-input
-                :cols="12"
-                :id="'password'"
-                :type="'password'"
-                :label-text="'Password'"
-                v-model="user.password"
-            />
-        </div>
-        <div class="row">
-            <my-input
-                :cols="12"
-                :id="'password-confirmation'"
-                :type="'password'"
-                :label-text="'Password Confirmation'"
-                v-model="user.passwordConfirmation"
-            />
-        </div>
-        <div class="row">
-            <my-button class="col s4 offset-s4" @click.prevent="register">Register</my-button>
-        </div>
-        <p class="center-align">Already have an account? <router-link to="/login"><a href="#">Log In.</a></router-link></p>
-    </form>
+    </div>
 </template>
 
 <script>
@@ -48,12 +66,17 @@ export default {
     name: "register",
     data: () => ({
         user: {
-            username: '',
+            name: '',
             email: '',
             password: '',
-            passwordConfirmation: ''
+            password_confirmation: ''
         }
     }),
+    computed: {
+        inProcess() {
+            return this.$store.state.helper.inProcess;
+        }
+    },
     methods: {
         register() {
             this.$store.dispatch('auth/registerUser', this.user)
@@ -61,3 +84,10 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.preloader-wrapper.small {
+    width: 20px;
+    height: 20px;
+}
+</style>

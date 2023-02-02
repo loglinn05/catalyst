@@ -15,7 +15,9 @@
         "vue": "^3.2.37"
     },
     "dependencies": {
+        "flat": "^5.0.2",
         "materialize-css": "^1.0.0-rc.2",
+        "mosha-vue-toastify": "^1.0.23",
         "scss-reset": "^1.2.2",
         "vue-router": "^4.1.6",
         "vuex": "^4.0.2"

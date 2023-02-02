@@ -2,7 +2,7 @@
 @import '../../node_modules/materialize-css/dist/css/materialize.min.css';
 
 // Fonts
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 // Variables
 @import 'variables';
@@ -17,22 +17,36 @@ html {
     box-sizing: border-box;
 }
 
-a {
+a:not(.btn):not(nav ul li a) {
     color: var(--pink-2);
+    font-weight: bold;
     text-decoration: none;
 }
 
-a:active {
+a:not(.btn):not(nav ul li a):hover, a:not(.btn):not(nav ul li a):active {
     color: var(--pink-3);
 }
 
+form {
+    padding: 1em !important;
+    border: 1px solid var(--pink-4);
+    border-radius: 2px;
+}
+
 body {
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 400;
-    line-height: 1.6;
     color: var(--pink-1);
     background-image: linear-gradient(to right bottom, var(--light-bg-gradient-color), var(--dark-bg-gradient-color));
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 100vh;
+}
+
+.btn.in-process {
+    margin-right: 10px;
+}
+
+.justify-content-center {
+    justify-content: center;
 }
