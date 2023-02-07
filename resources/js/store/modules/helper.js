@@ -12,7 +12,7 @@ const actions = {
     setAndDisplayErrors(ctx, errors) {
         ctx.commit(
             'setErrors',
-            flattenObject.flattenObjectWithoutKeys(errors)
+            flattenObject(errors)
         );
         state.errors.forEach((error) => {
             toast.dangerToast(error);

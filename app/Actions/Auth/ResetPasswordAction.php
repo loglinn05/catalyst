@@ -23,7 +23,7 @@ class ResetPasswordAction
                 event(new PasswordReset($user));
             }
         );
-        if (Password::PASSWORD_RESET) {
+        if ($response == Password::PASSWORD_RESET) {
             return response()->json([
                 'message' => 'Password reset succeeded.',
                 'response' => $response

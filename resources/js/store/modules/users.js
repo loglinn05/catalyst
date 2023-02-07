@@ -1,5 +1,4 @@
 import axios from '../../axios/axiosInstance.js'
-import router from '../../router/router.js'
 import toast from '../../modules/toast.js'
 
 const state = {

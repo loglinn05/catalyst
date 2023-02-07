@@ -11,14 +11,16 @@ import store from './store'
 import router from './router/router.js'
 import Root from './Root.vue'
 import components from './components/UI'
+import getLocation from './modules/getLocation.js'
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
  * to use in your application's views. An example is included for you.
  */
-
 const app = createApp(Root);
+
+getLocation();
 
 components.forEach(component => {
     app.component(component.name, component)

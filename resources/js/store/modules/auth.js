@@ -1,6 +1,5 @@
 import axios from '../../axios/axiosInstance.js'
 import router from '../../router/router.js'
-import toast from '../../modules/toast.js'
 
 const state = {}
 
@@ -11,6 +10,7 @@ const actions = {
             axios.post(
                 '/api/register', user
             ).then((response) => {
+                console.log(response);
                 if (response.data) {
                     resolve(response)
                     router.push('/login')

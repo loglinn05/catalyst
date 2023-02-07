@@ -116,9 +116,6 @@ export default {
     },
     beforeMount() {
         this.$store.dispatch('users/currentUserDetails')
-    },
-    mounted() {
-        console.log(this.$store.state.helper.modalInstances);
     }
 }
 </script>

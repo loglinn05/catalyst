@@ -4,6 +4,7 @@
                :type="type"
                :value="modelValue"
                @input="updateInput"
+               @blur="correctInputValue"
                class="validate">
         <label :for="id">{{ labelText }}</label>
         <span class="helper-text" data-error="Invalid input" data-success="Valid input"></span>
@@ -11,6 +12,8 @@
 </template>
 
 <script>
+import stripTags from '../../modules/stripTags.js'
+
 export default {
     name: "my-input",
     props: {
@@ -34,7 +37,13 @@ export default {
     },
     methods: {
         updateInput(event) {
-            this.$emit('update:modelValue', event.target.value)
+            this.$emit('update:modelValue', event.target.value);
+        },
+        correctInputValue(event) {
+            let inputValue = event.target.value;
+            inputValue.trim();
+            inputValue = stripTags(inputValue);
+            this.$emit('update:modelValue', inputValue);
         }
     }
 }

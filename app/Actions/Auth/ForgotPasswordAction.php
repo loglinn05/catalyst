@@ -15,11 +15,11 @@ class ForgotPasswordAction
             $formData->only('email')
         );
 
-        if (Password::RESET_LINK_SENT) {
+        if ($response == Password::RESET_LINK_SENT) {
             return response()->json([
                 'message' => 'E-mail sent.',
                 'response' => $response
-            ], 200);
+            ]);
         } else {
             return response()->json([
                 'errors' => ['No such user.'],

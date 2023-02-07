@@ -11,12 +11,11 @@ use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\ResetPasswordRequest;
-use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     public function login(LoginRequest $request) {
-        LoginAction::run($request);
+        return LoginAction::run($request);
     }
 
     public function register(RegisterRequest $request) {
@@ -31,13 +30,13 @@ class AuthController extends Controller
     }
 
     public function forgotPassword(ForgotPasswordRequest $request) {
-        ForgotPasswordAction::run($request->all());
+        return ForgotPasswordAction::run($request);
     }
 
     public function resetPassword(ResetPasswordRequest $request) {
         $credentials = $request->only(
             'email', 'password', 'password_confirmation', 'token'
         );
-        ResetPasswordAction::run($credentials);
+        return ResetPasswordAction::run($credentials);
     }
 }
