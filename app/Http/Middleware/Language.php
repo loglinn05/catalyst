@@ -20,13 +20,13 @@ class Language
     public function handle(Request $request, Closure $next)
     {
         if (
-            Session::has('applocale') &&
+            Session::has('locale') &&
             array_key_exists(
-                Session::get('applocale'),
+                Session::get('locale'),
                 Config::get('languages')
             )
         ) {
-            App::setLocale(Session::get('applocale'));
+            App::setLocale(Session::get('locale'));
         } else {
             App::setLocale(Config::get('app.fallback_locale'));
         }

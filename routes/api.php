@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('/change-email', [UsersController::class, 'changeEmail']);
     Route::post('/change-password', [UsersController::class, 'changePassword']);
 });
-Route::post("setLocale", [LanguageController::class, 'switchLang']);
+Route::post("setLocale", [LanguageController::class, "switchLang"]);
 Route::post("register", [AuthController::class, "register"]);
 Route::post("login", [AuthController::class, "login"]);
 Route::post("forgot-password", [AuthController::class, "forgotPassword"]);
