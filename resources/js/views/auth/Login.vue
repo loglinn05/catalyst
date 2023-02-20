@@ -1,13 +1,13 @@
 <template>
+    <h3>{{ $t('viewsMessages.loginNoun') }}</h3>
     <div class="col s6 offset-s3">
         <div class="row">
-            <h3>Log In</h3>
             <form class="col s12">
                 <div class="row">
                     <my-input
                         :id="'email'"
                         :type="'email'"
-                        :label-text="'E-mail'"
+                        :label-text="$t('inputsLabels.email')"
                         v-model="user.email"
                     />
                 </div>
@@ -15,13 +15,13 @@
                     <my-input
                         :id="'password'"
                         :type="'password'"
-                        :label-text="'Password'"
+                        :label-text="$t('inputsLabels.password')"
                         @keydown.enter="login"
                         v-model="user.password"
                     />
                 </div>
                 <div class="row center valign-wrapper justify-content-center">
-                    <my-button :class="[inProcess ? 'in-process' : '']" @click="login">Log In</my-button>
+                    <my-button :class="[inProcess ? 'in-process' : '']" @click="login">{{ $t('viewsMessages.loginVerb') }}</my-button>
                     <div v-if="inProcess" class="preloader-wrapper small active">
                         <div class="spinner-layer spinner-red-only">
                             <div class="circle-clipper left">
@@ -36,12 +36,10 @@
                         </div>
                     </div>
                 </div>
-                <p>Not registered?
-                    <router-link to="/register">
-                        <a href="#">Create an account.</a>
-                    </router-link>
+                <p>{{ $t('viewsMessages.notRegistered') }}
+                    <router-link to="/register">{{ $t('viewsMessages.createAccount') }}</router-link>
                 </p>
-                <router-link to="/forgot-password"><a href="#">Forgot password?</a></router-link>
+                <router-link to="/forgot-password">{{ $t('viewsMessages.forgotPassword') }}</router-link>
             </form>
         </div>
     </div>

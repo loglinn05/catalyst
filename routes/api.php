@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UsersController;
+use App\Http\Controllers\LanguageController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +23,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('/change-email', [UsersController::class, 'changeEmail']);
     Route::post('/change-password', [UsersController::class, 'changePassword']);
 });
-
+Route::post("setLocale", [LanguageController::class, 'switchLang']);
 Route::post("register", [AuthController::class, "register"]);
 Route::post("login", [AuthController::class, "login"]);
 Route::post("forgot-password", [AuthController::class, "forgotPassword"]);

@@ -7,22 +7,22 @@
                     <template v-if="!loggedIn">
                         <li>
                             <router-link to="/register">
-                                Register
+                                {{ $t('viewsMessages.registerNoun') }}
                             </router-link>
                         </li>
                         <li>
                             <router-link to="/login">
-                                Log In
+                                {{ $t('viewsMessages.loginNoun') }}
                             </router-link>
                         </li>
                     </template>
                     <template v-if="loggedIn">
-                        <li title="Profile Page">
+                        <li :title="$t('viewsMessages.profilePage')">
                             <router-link to="/profile">
                                 <i class="material-icons">account_circle</i>
                             </router-link>
                         </li>
-                        <li title="Settings">
+                        <li :title="$t('viewsMessages.userSettings')">
                             <router-link to="/settings">
                                 <i class="material-icons">settings</i>
                             </router-link>
@@ -30,7 +30,7 @@
                         <li>
                             <my-button
                                 :color="'pink darken-2'"
-                                @click="logout">Log Out</my-button>
+                                @click="logout">{{ $t('viewsMessages.logoutVerb') }}</my-button>
                         </li>
                     </template>
                 </ul>
@@ -63,7 +63,7 @@ export default {
             logout: 'auth/logoutUser'
         })
     },
-    created() {
+    beforeCreate() {
         this.$store.dispatch('auth/setUserAuthStatus')
     }
 }

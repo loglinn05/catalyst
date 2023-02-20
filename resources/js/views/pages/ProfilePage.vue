@@ -10,7 +10,7 @@
                     <a :href="'mailto:' + currentUser.email">{{ currentUser.email }}</a>
                 </div>
                 <div class="card-content">
-                    <p>Joined {{ currentUser.created_at }}</p>
+                    <p>{{ $t('viewsMessages.joined') }} {{ currentUser.created_at }}</p>
                 </div>
             </div>
         </div>

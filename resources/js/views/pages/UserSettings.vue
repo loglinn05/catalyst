@@ -1,6 +1,6 @@
 <template>
+    <h3>{{ $t('viewsMessages.settings') }}</h3>
     <div class="row">
-        <h3>Settings</h3>
         <div class="col s12 m6 offset-m3">
             <div class="card center">
                 <div class="card-image">
@@ -17,7 +17,7 @@
                     </a>
                 </div>
                 <div class="card-content">
-                    <my-button href="#change-password-modal" class="modal-trigger">Change Password</my-button>
+                    <my-button href="#change-password-modal" class="modal-trigger">{{ $t('viewsMessages.changePassword') }}</my-button>
                 </div>
             </div>
         </div>
@@ -25,13 +25,13 @@
         <!-- Username change modal -->
         <my-modal
             :id="'change-username'"
-            :modalFooterButtonText="'Change'"
+            :modalFooterButtonText="$t('viewsMessages.change')"
             @modalFooterButtonClicked="changeUsername"
         >
-            <h4>Change your username</h4>
+            <h4>{{ $t('viewsMessages.changeYourUsername') }}</h4>
             <my-input
                 :id="'username'"
-                :label-text="'New Username'"
+                :label-text="$t('inputsLabels.newUsername')"
                 @keydown.enter="changeUsername"
                 v-model="username"
             />
@@ -40,14 +40,14 @@
         <!-- E-mail change modal -->
         <my-modal
             :id="'change-email'"
-            :modalFooterButtonText="'Change'"
+            :modalFooterButtonText="$t('viewsMessages.change')"
             @modalFooterButtonClicked="changeEmail"
         >
-            <h4>Change your e-mail</h4>
+            <h4>{{ $t('viewsMessages.changeYourEmail') }}</h4>
             <my-input
                 :id="'email'"
                 :type="'email'"
-                :label-text="'New E-mail'"
+                :label-text="$t('inputsLabels.newEmail')"
                 @keydown.enter="changeEmail"
                 v-model="email"
             />
@@ -56,26 +56,26 @@
         <!-- Password change modal -->
         <my-modal
             :id="'change-password'"
-            :modalFooterButtonText="'Change'"
+            :modalFooterButtonText="$t('viewsMessages.change')"
             @modalFooterButtonClicked="changePassword"
         >
-            <h4>Change your password</h4>
+            <h4>{{ $t('viewsMessages.changeYourPassword') }}</h4>
             <my-input
                 :id="'old-password'"
                 :type="'password'"
-                :label-text="'Old Password'"
+                :label-text="$t('inputsLabels.oldPassword')"
                 v-model="passwords.old_password"
             />
             <my-input
                 :id="'new-password'"
                 :type="'password'"
-                :label-text="'New Password'"
+                :label-text="$t('inputsLabels.newPassword')"
                 v-model="passwords.new_password"
             />
             <my-input
                 :id="'new-password-confirmation'"
                 :type="'password'"
-                :label-text="'New Password Confirmation'"
+                :label-text="$t('inputsLabels.newPasswordConfirmation')"
                 @keydown.enter="changePassword"
                 v-model="passwords.new_password_confirmation"
             />
