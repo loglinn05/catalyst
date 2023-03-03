@@ -25,13 +25,13 @@ class ResetPasswordAction
         );
         if ($response == Password::PASSWORD_RESET) {
             return response()->json([
-                'message' => 'Password reset succeeded.',
+                'message' => __('messages.passwordResetSucceeded'),
                 'response' => $response
             ]);
         } else {
             return response()->json([
                 'errors' => [
-                    'The password reset request was received from an account with a different e-mail address.'
+                    __('messages.passwordResetFailed')
                 ],
                 'response' => $response
             ], 500);

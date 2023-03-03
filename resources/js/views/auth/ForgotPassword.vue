@@ -2,7 +2,7 @@
     <h3>{{ $t('viewsMessages.enterEmail') }}</h3>
     <div class="col s6 offset-s3">
         <div class="row">
-            <form class="col s12">
+            <form class="col s12" @submit.prevent>
                 <div class="row">
                     <my-input
                         :id="'email'"

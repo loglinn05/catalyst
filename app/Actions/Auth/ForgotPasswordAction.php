@@ -22,7 +22,7 @@ class ForgotPasswordAction
             ]);
         } else {
             return response()->json([
-                'errors' => ['E-mail has already been sent, or there is no such user.'],
+                'errors' => [__('messages.resetLinkNotSent')],
                 'response' => $response
             ], 500);
         }

@@ -32,7 +32,7 @@ class LoginAction
             return $tokenResponse;
         } else {
             return response()->json([
-                'errors' => ['Incorrect e-mail or password.']
+                'errors' => [__('messages.invalidCredentials')]
             ], 401);
         }
     }

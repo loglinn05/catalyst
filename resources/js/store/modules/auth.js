@@ -1,5 +1,6 @@
 import axios from '../../axios/axiosInstance.js'
 import router from '../../router/router.js'
+import traverseObject from "../../modules/traverseObject.js";
 
 const state = {}
 
@@ -61,7 +62,7 @@ const actions = {
                     reject(response)
                 }
             }).catch(error => {
-                console.log(error)
+                console.log(traverseObject(error, 'errors')[0])
                 if (error.response.data.errors) {
                     ctx.dispatch(
                         'setAndDisplayErrors',

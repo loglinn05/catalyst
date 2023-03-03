@@ -24,7 +24,7 @@ class AuthController extends Controller
         } else {
             return response()->json([
                 "success" => false,
-                "errors" => ["Registration failed because of a server-side error."]
+                "errors" => [__('messages.registrationFailed')]
             ], 500);
         }
     }
